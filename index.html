@@ -49,6 +49,12 @@
             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
             var fullAddr = data.address; // 최종 주소 변수
             var extraAddr = ""; // 조합형 주소 변수
+            var zoneCode = data.zonecode;
+
+            var addressInfo = {
+              address: fullAddr,
+              zonecode: zoneCode
+            };
 
             // 기본 주소가 도로명 타입일때 조합한다.
             if (data.addressType === "R") {
@@ -93,7 +99,9 @@
               fullRoadAddr += extraRoadAddr;
             }
 
-            window.Android.processDATA(fullRoadAddr); // data.zonecode + ", " +
+            var jsonAddressInfo = JSON.stringify(addressInfo);
+            window.Android.processDATA(jsonAddressInfo);
+            // window.Android.processDATA(fullRoadAddr); // data.zonecode + ", " +
           },
           width: "100%",
           height: "100%",
